@@ -68,3 +68,4 @@ The work on this fork is due the contribution of the following people:
 ### This fork is based on the work of the contributors:
 - jcmoyer
 - mckuhei/kebufu
+- Grieferus (GUI design)
