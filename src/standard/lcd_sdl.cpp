@@ -6,7 +6,7 @@
 #include <string>
 
 const SDL_Rect lcd_button_regions_sc55[32] = {
-    {  38,  32, 67, 19}, // Power
+    {  38,  31, 67, 19}, // Power
     {   0,   0,  0,  0},
     {   0,   0,  0,  0},
     { 968,  31, 53, 18}, // Instrument
@@ -239,10 +239,10 @@ void LCD_SDL_Backend::HandleEvent(const SDL_Event& sdl_event)
         case SDL_MOUSEBUTTONUP:
         case SDL_MOUSEBUTTONDOWN: {
             if (sdl_event.button.button == 1) {
-                if (drag_volume_knob || (sdl_event.button.x >= 153 && sdl_event.button.x <= 212 && sdl_event.button.y >= 38 && sdl_event.button.y <= 98)) {
+                if (drag_volume_knob || (sdl_event.button.x >= 153 && sdl_event.button.x <= 212 && sdl_event.button.y >= 36 && sdl_event.button.y <= 96)) {
                     drag_volume_knob = (sdl_event.type == SDL_MOUSEBUTTONDOWN) || (drag_volume_knob && sdl_event.type != SDL_MOUSEBUTTONUP);
                 }
-                if (sdl_event.button.clicks == 2 && (sdl_event.button.x >= 153 && sdl_event.button.x <= 212 && sdl_event.button.y >= 38 && sdl_event.button.y <= 98)) {
+                if (sdl_event.button.clicks == 2 && (sdl_event.button.x >= 153 && sdl_event.button.x <= 212 && sdl_event.button.y >= 36 && sdl_event.button.y <= 96)) {
                     m_lcd->volume = 0.8f;
                     LCD_VolumeChanged(*m_lcd, lcd_sdl_volume);
                 } 
@@ -295,7 +295,7 @@ void LCD_SDL_Backend::HandleEvent(const SDL_Event& sdl_event)
             }
             break;
         case SDL_MOUSEWHEEL:
-            if (sdl_event.wheel.mouseX >= 153 && sdl_event.wheel.mouseX <= 212 && sdl_event.wheel.mouseY >= 38 && sdl_event.wheel.mouseY <= 98) {
+            if (sdl_event.wheel.mouseX >= 153 && sdl_event.wheel.mouseX <= 212 && sdl_event.wheel.mouseY >= 36 && sdl_event.wheel.mouseY <= 96) {
                 int32_t relval = sdl_event.wheel.y;
                 if (relval > 10) { // Maximum ±2dB incremental
                     relval = 10;
@@ -482,7 +482,7 @@ void LCD_SDL_Backend::Render()
         }
         if ((m_lcd->button_enable & 4) != 0) { // STANDBY
             srcrect.x =   0;
-            srcrect.y = 518;
+            srcrect.y = 508;
             srcrect.w =  20;
             srcrect.h =  20;
             dstrect.x = 118;
@@ -497,7 +497,7 @@ void LCD_SDL_Backend::Render()
             srcrect.w = 118;
             srcrect.h = 118;
             dstrect.x = 153;
-            dstrect.y =  38;
+            dstrect.y =  36;
             dstrect.w =  59;
             dstrect.h =  59;
             SDL_RenderCopyEx(m_renderer, m_background, &srcrect, &dstrect, (m_lcd->volume - 0.5f) * 300.0, NULL, SDL_FLIP_NONE);
@@ -547,7 +547,7 @@ void LCD_SDL_Backend::Render()
                 srcrect.w = 200;
                 srcrect.h = 104;
                 dstrect.x = 696;
-                dstrect.y = 179;
+                dstrect.y = 169;
                 dstrect.w = 100;
                 dstrect.h =  52;
                 SDL_RenderCopy(m_renderer, m_background, &srcrect, &dstrect);
