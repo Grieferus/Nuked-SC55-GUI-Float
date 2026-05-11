@@ -129,7 +129,7 @@ bool LCD_SDL_Backend::Start(lcd_t& lcd)
         {
             background_enabled = true;
             screen_width       = 1120;
-            screen_height      = 233;
+            screen_height      = 228;
         }
     }
 
@@ -486,7 +486,7 @@ void LCD_SDL_Backend::Render()
             srcrect.w =  20;
             srcrect.h =  20;
             dstrect.x = 118;
-            dstrect.y =  42;
+            dstrect.y =  35;
             dstrect.w =  10;
             dstrect.h =  10;
             SDL_RenderCopy(m_renderer, m_background, &srcrect, &dstrect);
