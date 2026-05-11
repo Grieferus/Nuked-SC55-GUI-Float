@@ -1,94 +1,65 @@
 # Building
 
-Requirements:
+This is a building guide for newbies like me.
 
-- cmake
-- SDL2
-- rtmidi (Linux, Mac only)
+### Windows
+For building on Windows, I recommend MinGW64 which is part of MSYS2.
 
-Tested compilers:
+Full building guide goes like this:
 
-- msvc 19.39.33523
-- clang 19.1.7
-- gcc 14.2.0
-
-Full build
-
+- Open MinGW64;
+- Install necessary dependencies like this:
 ```bash
-git clone git@github.com:Grieferus/Nuked-SC55-GUI-Float.git
+pacman -S make git gettext base-devel libtool pkg-config mingw-w64-x86_64-cmake mingw-w64-x86_64-SDL2 mingw-w64-x86_64-toolchain mingw-w64-x86_64-gcc-libs
+```
+- Clone the repository and go to the folder:
+```bash
+git clone https://github.com/Grieferus/Nuked-SC55-GUI-Float
 cd Nuked-SC55-GUI-Float
+```
+- Create a build folder and go to it:
+```bash
 mkdir build
 cd build
+```
+- Create an `app.rc` file in `/src` folder and define the path like this:
+```rc
+IDI_ICON1 ICON "Nuked-SC55-GUI-Float/data/nuked-icon-ico.ico"
+```
+- Go to `CMakeFiles.txt` and add `app.rc` to the source list of standard frontend:
+```cmake
+PRIVATE
+...
+src/app.rc
+```
+This will make sure that the `nuked-sc55` will have an icon.
+
+- Use CMake to generate a solution:
+```bash
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
 ```
+This will generate `nuked-sc55-backend` library file and two binaries `nuked-sc55` and `nuked-sc55-render`. Copy these three into your Nuked-SC55 folder.
 
-If you're building a binary to only run on your local machine, consider adding
-`-DCMAKE_CXX_FLAGS="-march=native -mtune=native"
--DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON` to the first cmake command above to
-enable more optimizations.
-
-After building, you can create a self-contained install with any required files
-in their correct locations under `<path>`:
-
+#### If your path contains non-ASCII characters, do this:
+- Create a folder in C:/, either manually or in MinGW64. In MinGW64, it goes like this:
 ```bash
-cmake --install . --prefix=<path>
+cd /c
+mkdir projects
+cd projects
 ```
-
-### Windows
-
-For builds using msvc you will most likely need to pass
-`-DCMAKE_PREFIX_PATH=<path>` where `<path>` points to a directory containing
-SDL2, and optionally rtmidi (only when `-DUSE_RTMIDI=ON`).
-
-cmake is expecting to find `<path>/SDL2-X.YY.Z/cmake/sdl2-config.cmake`.
-
-For builds in an msys2 environment, installing SDL2 via pacman should be
-enough.
-
-#### ASIO (optional)
- 
- To enable ASIO support, pass `-DNUKED_ENABLE_ASIO=ON` and
- `-DNUKED_ASIO_SDK_DIR=<path>` where `<path>` points to the extracted ASIO SDK
- obtained from [here](https://www.steinberg.net/developers/).
-
-# Development
-
-Requirements:
-
-- Python 3
-- [Catch2 v3.7.0](https://github.com/catchorg/Catch2) installed in
-  `CMAKE_PREFIX_PATH`
-
-There is a test suite that makes sure new commits don't change existing
-behavior. It is expected that all tests pass for every commit unless either:
-
-- Upstream modified backend behavior in a way that affects sample output, or
-- We modified the renderer frontend in a way that causes different output
-
-You can run the test suite by configuring with `-DNUKED_ENABLE_TESTS=ON` and
-`-DNUKED_TEST_ROMDIR=<path>` and running:
-
+- Clone the repository;
+- in `app.rc` define the full path like this:
+```rc
+IDI_ICON1 ICON "C:/[yourfolder]/Nuked-SC55-GUI-Float/data/nuked-icon-ico.ico"
 ```
-ctest . -C Release
-```
+- Perform the rest of the steps as usual.
 
-Note that these tests take a long time to finish individually, so you may want
-to pass `-j` to run them in parallel. Currently these tests require a SC-55
-(v1.21) and SC-55mk2 romset with these SHA256 hashes:
+If you're building a binary to only run on your local machine, consider adding `-DCMAKE_CXX_FLAGS="-march=native -mtune=native" -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON` to the first cmake command to enable more optimizations.
+Also `-DBUILD_SHARED_LIBS=OFF -DCMAKE_EXE_LINKER_FLAGS="-static"` arguments can be added for static linking.
 
-```
-7e1bacd1d7c62ed66e465ba05597dcd60dfc13fc23de0287fdbce6cf906c6544 *sc55_rom1.bin
-effc6132d68f7e300aaef915ccdd08aba93606c22d23e580daf9ea6617913af1 *sc55_rom2.bin
-5655509a531804f97ea2d7ef05b8fec20ebf46216b389a84c44169257a4d2007 *sc55_waverom1.bin
-c655b159792d999b90df9e4fa782cf56411ba1eaa0bb3ac2bdaf09e1391006b1 *sc55_waverom2.bin
-334b2d16be3c2362210fdbec1c866ad58badeb0f84fd9bf5d0ac599baf077cc2 *sc55_waverom3.bin
+### ASIO (Optional)
 
-8a1eb33c7599b746c0c50283e4349a1bb1773b5c0ec0e9661219bf6c067d2042 *rom1.bin
-a4c9fd821059054c7e7681d61f49ce6f42ed2fe407a7ec1ba0dfdc9722582ce0 *rom2.bin
-b0b5f865a403f7308b4be8d0ed3ba2ed1c22db881b8a8326769dea222f6431d8 *rom_sm.bin
-c6429e21b9b3a02fbd68ef0b2053668433bee0bccd537a71841bc70b8874243b *waverom1.bin
-5b753f6cef4cfc7fcafe1430fecbb94a739b874e55356246a46abe24097ee491 *waverom2.bin
-```
+To enable ASIO support, pass `-DNUKED_ENABLE_ASIO=ON` and `-DNUKED_ASIO_SDK_DIR=<path>` where `<path>` points to the extracted ASIO SDK obtained from [here](https://www.steinberg.net/developers/).
 
-`NUKED_TEST_ROMDIR` should point to a directory containing these files.
+Incase you want a static linking you can add `-DCMAKE_EXE_LINKER_FLAGS="-static"` flag as well
