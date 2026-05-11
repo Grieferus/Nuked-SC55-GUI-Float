@@ -21,8 +21,8 @@ Differences from upstream:
 
 ## Downloads 
 
-Windows Builds can be downloaded from here: [Releases](https://github.com/linoshkmalayil/Nuked-SC55-GUI-Float/releases/)\
-Latest Build: [Latest](https://github.com/linoshkmalayil/Nuked-SC55-GUI-Float/releases/latest)
+Windows Builds can be downloaded from here: [Releases](https://github.com/Grieferus/Nuked-SC55-GUI-Float/releases/)\
+Latest Build: [Latest](https://github.com/Grieferus/Nuked-SC55-GUI-Float/releases/latest)
 
 Linux and Mac requires building from source. (See [BUILDING](README.md#building))
 
