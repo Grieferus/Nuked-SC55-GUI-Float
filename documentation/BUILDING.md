@@ -5,7 +5,7 @@ This is a building guide for newbies like me.
 ### Windows
 For building on Windows, I recommend MinGW64 which is part of MSYS2.
 
-Full building guide goes like this:
+Full building process goes like this:
 
 - Open MinGW64;
 - Install necessary dependencies like this:
@@ -51,15 +51,16 @@ cd projects
 - Clone the repository;
 - in `app.rc` define the full path like this:
 ```rc
-IDI_ICON1 ICON "C:/[yourfolder]/Nuked-SC55-GUI-Float/data/nuked-icon-ico.ico"
+IDI_ICON1 ICON "C:/projects/Nuked-SC55-GUI-Float/data/nuked-icon-ico.ico"
 ```
 - Perform the rest of the steps as usual.
+This is a problem of MSYS2 as a whole which has to do with its UNIX heritage.
 
 If you're building a binary to only run on your local machine, consider adding `-DCMAKE_CXX_FLAGS="-march=native -mtune=native" -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON` to the first cmake command to enable more optimizations.
-Also `-DBUILD_SHARED_LIBS=OFF -DCMAKE_EXE_LINKER_FLAGS="-static"` arguments can be added for static linking.
+`-DBUILD_SHARED_LIBS=OFF -DCMAKE_EXE_LINKER_FLAGS="-static"` arguments can be added for static linking.
 
 ### ASIO (Optional)
 
 To enable ASIO support, pass `-DNUKED_ENABLE_ASIO=ON` and `-DNUKED_ASIO_SDK_DIR=<path>` where `<path>` points to the extracted ASIO SDK obtained from [here](https://www.steinberg.net/developers/).
 
-Incase you want a static linking you can add `-DCMAKE_EXE_LINKER_FLAGS="-static"` flag as well
+If you want a static linking, you can add `-DCMAKE_EXE_LINKER_FLAGS="-static"` flag as well.
