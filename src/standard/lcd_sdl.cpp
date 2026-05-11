@@ -547,7 +547,7 @@ void LCD_SDL_Backend::Render()
                 srcrect.w = 200;
                 srcrect.h = 104;
                 dstrect.x = 696;
-                dstrect.y = 169;
+                dstrect.y = 174;
                 dstrect.w = 100;
                 dstrect.h =  52;
                 SDL_RenderCopy(m_renderer, m_background, &srcrect, &dstrect);
