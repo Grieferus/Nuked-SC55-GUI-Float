@@ -15,8 +15,8 @@ Tested compilers:
 Full build
 
 ```bash
-git clone git@github.com:linoshkmalayil/Nuked-SC55.git
-cd Nuked-SC55
+git clone git@github.com:Grieferus/Nuked-SC55-GUI-Float.git
+cd Nuked-SC55-GUI-Float
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
