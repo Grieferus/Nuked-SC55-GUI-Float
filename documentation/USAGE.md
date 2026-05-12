@@ -306,3 +306,10 @@ the the selected romset.
 The emulator natively produces audio at 64000hz or 66207hz depending on the
 romset. Some ASIO drivers cannot support these frequencies so resampling to
 `<rate>` is necessary.
+
+### Personal opinion
+
+For recording, I would recommend using mk2 firmware due to better
+signal-to-noise ratio, while for games, ST firmware is more than enough,
+especially when using `--no-lcd`. Both mk2 and ST firmware must be
+CTF-patched.
