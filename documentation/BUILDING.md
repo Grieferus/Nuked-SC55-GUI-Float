@@ -2,15 +2,19 @@
 
 This is a building guide for newbies like me.
 
-### Windows
-For building on Windows, I recommend MinGW64 which is part of MSYS2.
+## Windows
+For building on Windows, I recommend UCRT64 which is part of MSYS2. Alternatively, you can use MinGW64 if you plan on having Win7/Win8 compatibility.
 
 Full building process goes like this:
 
-- Open MinGW64;
-- Install necessary dependencies like this:
+- Open UCRT64 or MinGW64;
+- Install necessary dependencies like this for MinGW64:
 ```bash
 pacman -S make git gettext base-devel libtool pkg-config mingw-w64-x86_64-cmake mingw-w64-x86_64-SDL2 mingw-w64-x86_64-toolchain mingw-w64-x86_64-gcc-libs
+```
+- Or like this for UCRT64 (If you downloaded MinGW64 dependencies):
+```bash
+pacman -S openssh $MINGW_PACKAGE_PREFIX-toolchain $MINGW_PACKAGE_PREFIX-cmake $MINGW_PACKAGE_PREFIX-git
 ```
 - Clone the repository and go to the folder:
 ```bash
@@ -42,7 +46,7 @@ cmake --build .
 This will generate `nuked-sc55-backend` library file and two binaries `nuked-sc55` and `nuked-sc55-render`. Copy these three into your Nuked-SC55 folder.
 
 #### If your path contains non-ASCII characters, do this:
-- Create a folder in C:/, either manually or in MinGW64. In MinGW64, it goes like this:
+- Create a folder in C:/, either manually or in MinGW64/UCRT64. In MinGW64, it goes like this:
 ```bash
 cd /c
 mkdir projects
@@ -54,6 +58,7 @@ cd projects
 IDI_ICON1 ICON "C:/projects/Nuked-SC55-GUI-Float/data/nuked-icon-ico.ico"
 ```
 - Perform the rest of the steps as usual.
+
 This is a problem of MSYS2 as a whole which has to do with its UNIX heritage.
 
 If you're building a binary to only run on your local machine, consider adding `-DCMAKE_CXX_FLAGS="-march=native -mtune=native" -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON` to the first cmake command to enable more optimizations.
@@ -63,7 +68,7 @@ If you're building a binary to only run on your local machine, consider adding `
 
 To enable ASIO support, pass `-DNUKED_ENABLE_ASIO=ON` and `-DNUKED_ASIO_SDK_DIR=<path>` where `<path>` points to the extracted ASIO SDK obtained from [here](https://www.steinberg.net/developers/).
 
-If you want a static linking, you can add `-DCMAKE_EXE_LINKER_FLAGS="-static"` flag as well.
+If you want static linking, you can add `-DCMAKE_EXE_LINKER_FLAGS="-static"` flag as well.
 
 ## Mac and Linux
 
