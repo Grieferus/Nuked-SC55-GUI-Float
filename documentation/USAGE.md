@@ -170,12 +170,14 @@ General options:
   -v, --version                                 Display version information.
 
 Audio options:
-  -pi, --portin      <device_name_or_number>    Set MIDI input port.
-  -po, --portout     <device_name_or_number>    Set MIDI output port.
   -a, --audio-device <device_name_or_number>    Set output audio device.
   -b, --buffer-size  <size>[:count]             Set buffer size, number of buffers.
   -f, --format       s16|s32|f32                Set output format.
   --disable-oversampling                        Halves output frequency.
+
+MIDI port options (default, unless set to serial):
+   -pi, --portin      <device_name_or_number>    Set MIDI input port.
+   -po, --portout     <device_name_or_number>    Set MIDI output port.
 
 Emulator options:
   -r, --reset     gs|gm                         Reset system in GS or GM mode.
