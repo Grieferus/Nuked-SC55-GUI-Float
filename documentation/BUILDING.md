@@ -67,7 +67,7 @@ If you want a static linking, you can add `-DCMAKE_EXE_LINKER_FLAGS="-static"` f
 
 ## Mac and Linux
 
-For building on Mac and Linux, you need rtmidi
+For building on Mac and Linux, you need rtmidi.
 
 Full building process is similar to the Windows one, but I will still add it here:
 ```bash
