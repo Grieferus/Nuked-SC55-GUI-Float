@@ -72,8 +72,6 @@ If you're building a binary to only run on your local machine, consider adding `
 
 To enable ASIO support, pass `-DNUKED_ENABLE_ASIO=ON` and `-DNUKED_ASIO_SDK_DIR=<path>` where `<path>` points to the extracted ASIO SDK obtained from [here](https://www.steinberg.net/developers/).
 
-If you want static linking, you can add `-DCMAKE_EXE_LINKER_FLAGS="-static"` flag as well.
-
 ## Mac and Linux
 
 For building on Mac and Linux, you need rtmidi.
