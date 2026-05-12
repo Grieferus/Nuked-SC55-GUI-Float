@@ -43,9 +43,11 @@ This will make sure that the `nuked-sc55` will have an icon.
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
 ```
-(When using UCRT64, make sure to add `-DCMAKE_PREFIX_PATH=<path>`, where `<path>` points to a directory containing SDL2)
+(When using UCRT64, make sure to add `-DCMAKE_PREFIX_PATH=<path>`, where `<path>` points
+to a directory containing SDL2, and `-DCMAKE_EXE_LINKER_FLAGS="-static"` to make it work in the first place)
 
-This will generate `nuked-sc55-backend` library file and two binaries `nuked-sc55` and `nuked-sc55-render`. Copy these three into your Nuked-SC55 folder.
+This will generate `nuked-sc55-backend` library file and two binaries `nuked-sc55` and `nuked-sc55-render`.
+Copy these into your Nuked-SC55 folder.
 
 #### If your path contains non-ASCII characters, do this:
 - Create a folder in C:/, either manually or in MinGW64/UCRT64. In MinGW64, it goes like this:
