@@ -113,7 +113,6 @@ if(SDL2_FOUND)
         src/standard/lcd_sdl.cpp
         src/standard/main.cpp
         src/standard/output_sdl.cpp
-        src/app.rc
         
 
         PRIVATE FILE_SET headers TYPE HEADERS FILES
