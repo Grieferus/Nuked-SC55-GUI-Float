@@ -268,7 +268,7 @@ void LCD_SDL_Backend::HandleEvent(const SDL_Event& sdl_event)
         case SDL_MOUSEMOTION:
             if (drag_volume_knob) {
                 float angle = (float) (atan2(sdl_event.motion.y - 66, sdl_event.motion.x - 183) + 270.0f / 180.0f * M_PI);
-                if (isnan(angle)) {
+                if (std::isnan(angle)) {
                     angle = (float)(270.0 / 180.0 * M_PI);
                 }
                 if (angle > 2.0 * M_PI) {
