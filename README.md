@@ -1,5 +1,7 @@
 # Nuked SC-55
 
+<img width="1680" height="342" alt="nuked_sc55_demo" src="https://github.com/user-attachments/assets/5af302ac-bac4-4383-900a-cb37c85786b3" />
+
 Fork of [nukeykt/Nuked-SC55](https://github.com/nukeykt/Nuked-SC55) with
 the optimization work of jcmoyer [jcmoyer/Nuked-SC55](https://github.com/jcmoyer/Nuked-SC55)
 and GUI code work of kebufu [kebufu/Nuked-SC55](https://github.com/kebufu/Nuked-SC55) (Formerly mckuhei).
