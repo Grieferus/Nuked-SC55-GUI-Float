@@ -6,29 +6,29 @@
 #include <string>
 
 const SDL_Rect lcd_button_regions_sc55[32] = {
-    {  38,  31, 67, 19}, // Power
+    {  38,  32, 67, 19}, // Power
     {   0,   0,  0,  0},
     {   0,   0,  0,  0},
-    { 968,  31, 53, 18}, // Instrument
-    {1024,  31, 53, 18},
-    { 754,  74, 26, 26}, // Mute
+    { 968,  32, 53, 18}, // Instrument
+    {1024,  32, 53, 18},
+    { 754,  77, 26, 26}, // Mute
     { 754,  28, 26, 26}, // All
     {   0,   0,  0,  0},
-    { 968, 172, 53, 18}, // MIDI ch
-    {1024, 172, 53, 18},
-    { 968, 126, 53, 18}, // Chorus
-    {1024, 126, 53, 18},
+    { 968, 177, 53, 18}, // MIDI ch
+    {1024, 177, 53, 18},
+    { 968, 129, 53, 18}, // Chorus
+    {1024, 129, 53, 18},
     { 968,  78, 53, 18}, // Pan
     {1024,  78, 53, 18},
-    { 903,  31, 53, 18}, // Part R
+    { 903,  32, 53, 18}, // Part R
     {   0,   0,  0,  0},
-    { 831, 172, 53, 18}, // Key shift
-    { 887, 172, 53, 18},
-    { 831, 126, 53, 18}, // Reverb
-    { 887, 126, 53, 18},
+    { 831, 177, 53, 18}, // Key shift
+    { 887, 177, 53, 18},
+    { 831, 129, 53, 18}, // Reverb
+    { 887, 129, 53, 18},
     { 831,  78, 53, 18}, // Level
     { 887,  78, 53, 18},
-    { 849,  31, 53, 18}, // Part L
+    { 849,  32, 53, 18}, // Part L
     {   0,   0,  0,  0},
     {   0,   0,  0,  0},
     {   0,   0,  0,  0},
@@ -239,10 +239,10 @@ void LCD_SDL_Backend::HandleEvent(const SDL_Event& sdl_event)
         case SDL_MOUSEBUTTONUP:
         case SDL_MOUSEBUTTONDOWN: {
             if (sdl_event.button.button == 1) {
-                if (drag_volume_knob || (sdl_event.button.x >= 153 && sdl_event.button.x <= 212 && sdl_event.button.y >= 36 && sdl_event.button.y <= 96)) {
+                if (drag_volume_knob || (sdl_event.button.x >= 153 && sdl_event.button.x <= 212 && sdl_event.button.y >= 38 && sdl_event.button.y <= 97)) {
                     drag_volume_knob = (sdl_event.type == SDL_MOUSEBUTTONDOWN) || (drag_volume_knob && sdl_event.type != SDL_MOUSEBUTTONUP);
                 }
-                if (sdl_event.button.clicks == 2 && (sdl_event.button.x >= 153 && sdl_event.button.x <= 212 && sdl_event.button.y >= 36 && sdl_event.button.y <= 96)) {
+                if (sdl_event.button.clicks == 2 && (sdl_event.button.x >= 153 && sdl_event.button.x <= 212 && sdl_event.button.y >= 38 && sdl_event.button.y <= 97)) {
                     m_lcd->volume = 0.8f;
                     LCD_VolumeChanged(*m_lcd, lcd_sdl_volume);
                 } 
@@ -295,7 +295,7 @@ void LCD_SDL_Backend::HandleEvent(const SDL_Event& sdl_event)
             }
             break;
         case SDL_MOUSEWHEEL:
-            if (sdl_event.wheel.mouseX >= 153 && sdl_event.wheel.mouseX <= 212 && sdl_event.wheel.mouseY >= 36 && sdl_event.wheel.mouseY <= 96) {
+            if (sdl_event.wheel.mouseX >= 153 && sdl_event.wheel.mouseX <= 212 && sdl_event.wheel.mouseY >= 38 && sdl_event.wheel.mouseY <= 97) {
                 int32_t relval = sdl_event.wheel.y;
                 if (relval > 10) { // Maximum ±2dB incremental
                     relval = 10;
@@ -476,7 +476,7 @@ void LCD_SDL_Backend::Render()
                 SDL_RenderCopy(m_renderer, m_background, &srcrect, &dstrect);
             }
             if ((m_lcd->button_enable & 2) != 0) { // MUTE
-                dstrect.y = 74;
+                dstrect.y = 77;
                 SDL_RenderCopy(m_renderer, m_background, &srcrect, &dstrect);
             }
         }
@@ -486,7 +486,7 @@ void LCD_SDL_Backend::Render()
             srcrect.w =  20;
             srcrect.h =  20;
             dstrect.x = 118;
-            dstrect.y =  35;
+            dstrect.y =  37;
             dstrect.w =  10;
             dstrect.h =  10;
             SDL_RenderCopy(m_renderer, m_background, &srcrect, &dstrect);
@@ -497,7 +497,7 @@ void LCD_SDL_Backend::Render()
             srcrect.w = 118;
             srcrect.h = 118;
             dstrect.x = 153;
-            dstrect.y =  36;
+            dstrect.y =  38;
             dstrect.w =  59;
             dstrect.h =  59;
             SDL_RenderCopyEx(m_renderer, m_background, &srcrect, &dstrect, (m_lcd->volume - 0.5f) * 300.0, NULL, SDL_FLIP_NONE);
@@ -530,7 +530,7 @@ void LCD_SDL_Backend::Render()
                 srcrect.y = 456 + 50 * (type >> 1);
                 srcrect.w = 262;
                 srcrect.h =  50;
-                dstrect.x = 533;
+                dstrect.x = 535;
                 dstrect.y = 195;
                 dstrect.w = 131;
                 dstrect.h =  25;
@@ -557,8 +557,8 @@ void LCD_SDL_Backend::Render()
         srcrect.y =   0;
         srcrect.w = 740;
         srcrect.h = 268;
-        dstrect.x = 281;
-        dstrect.y =  48;
+        dstrect.x = 282;
+        dstrect.y =  47;
         dstrect.w = 370;
         dstrect.h = 134;
         SDL_RenderCopy(m_renderer, m_texture, &srcrect, &dstrect);
