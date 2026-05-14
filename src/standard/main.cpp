@@ -542,7 +542,7 @@ bool FE_OpenAudio(FE_Application& fe, const FE_Parameters& params)
 
 void FE_SetMIDIOutCallback(FE_Application& fe)
 {
-    for(size_t i = 0; i < fe.instances_in_use; i++)
+    for (size_t i = 0; i < fe.instances_in_use; i++)
     {
         fe.instances[i].emu.SetMidiOutCallback(MIDI_MIDIOutCallBack);
     }
@@ -550,7 +550,7 @@ void FE_SetMIDIOutCallback(FE_Application& fe)
 
 void FE_SetSerialCallback(FE_Application& fe)
 {
-    for(size_t i = 0; i < fe.instances_in_use; i++)
+    for (size_t i = 0; i < fe.instances_in_use; i++)
     {
         fe.instances[i].emu.SetSerialPostCallback(SERIAL_PostUART);
     }
@@ -913,7 +913,7 @@ FE_ParseError FE_ParseCommandLine(int argc, char* argv[], FE_Parameters& result)
                 return FE_ParseError::UnexpectedEnd;
             }
 
-            if(reader.Arg() == "RS422")
+            if (reader.Arg() == "RS422")
             {
                 result.serial_type = Computerswitch::RS422;
             }
@@ -1412,7 +1412,7 @@ int main(int argc, char *argv[])
 
     if (params.reset)
     {
-        if(params.serial_type != Computerswitch::MIDI)
+        if (params.serial_type != Computerswitch::MIDI)
         {
             for (size_t i = 0; i < frontend.instances_in_use; ++i)
             {
